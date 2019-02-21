@@ -30,8 +30,9 @@ export class App extends Component {
 
   handleReset = () => {
     const copy = [...this.state.data];
-    const updated = copy.map(counter => {
-      counter.value = 0;
+    const updated = copy.map(element => {
+      element.value = 0;
+      return element;
     });
     this.setState({ data: updated });
   };
