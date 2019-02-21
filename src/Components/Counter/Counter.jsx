@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 export class Counter extends Component {
-  state = { id: this.props.id, value: this.props.value };
+  // state = { id: this.props.id, value: this.props.value };
 
   //these handlers should be moved to the parent Counters as well, since all the state is being stored there
   handlePlus = () => {
@@ -18,7 +18,7 @@ export class Counter extends Component {
     //   return existingClass + "-primary";
     // }
     // return existingClass + "-warning";
-    return this.state.value > 0 ? "primary" : "warning";
+    return this.props.value > 0 ? "primary" : "warning";
   };
 
   render() {
@@ -26,26 +26,26 @@ export class Counter extends Component {
       <React.Fragment>
         <h2>
           <span className={`badge badge-${this.positive()}`}>
-            {this.state.value}
+            {this.props.value}
           </span>
         </h2>
         <button
           type="button"
-          onClick={() => this.props.handlePlus(this.state.id)}
+          onClick={() => this.props.handlePlus(this.props.id)}
           className="btn btn-success"
         >
           +
         </button>
         <button
           type="button"
-          onClick={() => this.props.handleMinus(this.state.id)}
+          onClick={() => this.props.handleMinus(this.props.id)}
           className="btn btn-danger"
         >
           -
         </button>
         <button
           type="button"
-          onClick={() => this.props.handleDelete(this.state.id)}
+          onClick={() => this.props.handleDelete(this.props.id)}
           className="btn btn-dark"
         >
           Delete

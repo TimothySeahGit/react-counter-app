@@ -13,23 +13,39 @@ export class Counters extends Component {
     this.setState({ data: filteredData });
   };
 
-  //these handlers should be moved to the parent Counters as well, since all the state is being stored there
-  handlePlus = counterID => {
-    console.log(counterID);
-    const increment = this.state.value + 1;
-    this.setState({ value: increment });
-  };
-  handleMinus = counterID => {
-    console.log(counterID);
-    const decrement = this.state.value - 1;
-    this.setState({ value: decrement });
+  settingState = (counterID, operator) => {
+    const copy = [...this.state.data];
+    copy.find(element => element.id === counterID).value += operator;
+
+    this.setState({ data: copy });
   };
 
+  handlePlus = counterID => {
+    this.settingState(counterID, 1);
+  };
+  handleMinus = counterID => {
+    this.settingState(counterID, -1);
+  };
+
+  handleReset = () => {
+    const copy = [...this.state.data];
+    const updated = copy.map(counter => {
+      counter.value = 0;
+    });
+    this.setState({ data: updated });
+  };
   render() {
     const { data } = this.state;
     const hasSomething = data.length;
     return (
       <div>
+        <button
+          onClick={this.handleReset}
+          type="button"
+          className="btn btn-outline-danger"
+        >
+          Danger
+        </button>
         {/* {!hasSomething && <h2>no more counters</h2>} */}
         {!hasSomething
           ? "No more counters"
