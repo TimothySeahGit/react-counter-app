@@ -12,11 +12,21 @@ export class Counter extends Component {
     this.setState({ value: decrement });
   };
 
+  positive = () => {
+    // if (this.state.value > 0) {
+    //   return existingClass + "-primary";
+    // }
+    // return existingClass + "-warning";
+    return this.state.value > 0 ? "primary" : "warning";
+  };
+
   render() {
     return (
       <React.Fragment>
         <h2>
-          <span className="badge badge-secondary">{this.state.value}</span>
+          <span className={`badge badge-${this.positive()}`}>
+            {this.state.value}
+          </span>
         </h2>
         <button
           type="button"
