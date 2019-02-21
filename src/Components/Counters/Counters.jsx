@@ -1,46 +1,15 @@
 import React, { Component } from "react";
-import { counters } from "../../sampleData";
+
 import { Counter } from "../Counter/Counter";
 
 export class Counters extends Component {
-  state = { data: counters };
-  //Counter is a child of Counters
-  //passed handle from parent to child since button is in child but state is in parent
-  handleDelete = counterID => {
-    const filteredData = this.state.data.filter(
-      counter => counter.id !== counterID
-    );
-    this.setState({ data: filteredData });
-  };
-
-  settingState = (counterID, operator) => {
-    const copy = [...this.state.data];
-    copy.find(element => element.id === counterID).value += operator;
-
-    this.setState({ data: copy });
-  };
-
-  handlePlus = counterID => {
-    this.settingState(counterID, 1);
-  };
-  handleMinus = counterID => {
-    this.settingState(counterID, -1);
-  };
-
-  handleReset = () => {
-    const copy = [...this.state.data];
-    const updated = copy.map(counter => {
-      counter.value = 0;
-    });
-    this.setState({ data: updated });
-  };
   render() {
-    const { data } = this.state;
+    const { data } = this.props;
     const hasSomething = data.length;
     return (
       <div>
         <button
-          onClick={this.handleReset}
+          onClick={this.props.handleReset}
           type="button"
           className="btn btn-outline-danger"
         >
@@ -54,9 +23,10 @@ export class Counters extends Component {
                 key={counter.id}
                 id={counter.id}
                 value={counter.value}
-                handleDelete={this.handleDelete}
-                handlePlus={this.handlePlus}
-                handleMinus={this.handleMinus}
+                handleDelete={this.props.handleDelete}
+                handlePlus={this.props.handlePlus}
+                handleMinus={this.props.handleMinus}
+                handleReset={this.props.handleReset}
               />
             ))}
       </div>
