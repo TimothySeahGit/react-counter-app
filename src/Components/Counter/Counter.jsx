@@ -31,14 +31,14 @@ export class Counter extends Component {
         </h2>
         <button
           type="button"
-          onClick={this.handlePlus}
+          onClick={() => this.props.handlePlus(this.state.id)}
           className="btn btn-success"
         >
           +
         </button>
         <button
           type="button"
-          onClick={this.handleMinus}
+          onClick={() => this.props.handleMinus(this.state.id)}
           className="btn btn-danger"
         >
           -
