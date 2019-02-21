@@ -3,6 +3,7 @@ import React, { Component } from "react";
 export class Counter extends Component {
   state = { id: this.props.id, value: this.props.value };
 
+  //these handlers should be moved to the parent Counters as well, since all the state is being stored there
   handlePlus = () => {
     const increment = this.state.value + 1;
     this.setState({ value: increment });
@@ -41,6 +42,13 @@ export class Counter extends Component {
           className="btn btn-danger"
         >
           -
+        </button>
+        <button
+          type="button"
+          onClick={() => this.props.handleDelete(this.state.id)}
+          className="btn btn-dark"
+        >
+          Delete
         </button>
       </React.Fragment>
     );
